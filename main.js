@@ -7,6 +7,8 @@ const questionBody = document.getElementById('question-body');
 const resultsBody = document.getElementById('results-body');
 
 const questionTxt = document.getElementById('question');
+const bttnStartGame = document.getElementById('start-game')
+const bttnNextQuestion = document.getElementById('next-question')
 
 // ---------- Set SPA
 
@@ -50,5 +52,14 @@ axios.get('https://opentdb.com/api.php?amount=10&category=20')
     })
     .catch(err => console.error(err,'ERROR'));
 
+// ---------- Start game
 
+const startGame = () => {
 
+};
+
+const showQuestion = () => {
+    questionTxt.innerHTML = questionsAll.question;
+};
+
+bttnStartGame.addEventListener('click', startGame);
