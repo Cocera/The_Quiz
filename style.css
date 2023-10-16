@@ -26,6 +26,7 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    text-align: center;
 }
 
 nav {
@@ -43,10 +44,21 @@ nav {
 }
 
 body>section {
-    padding: 0px 50px;
+    margin: 0px 50px;
 }
 
 nav>span:hover {
     color: yellow;
     text-decoration: underline;
+}
+
+button.btn-answer {
+    width: 90vw;
+    height: 8vh;
+    margin: 0px 50px;
+}
+
+section#question {
+    margin: 0px 50px;
+    font-weight: 700;
 }

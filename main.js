@@ -57,6 +57,10 @@ const startGame = () => {
 };
 
 function showQuestion(question) {
+    const txtPosition = document.getElementById('currentPosition');
+    txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`; // NO IMPRIME
+
+
     questionTxt.innerText = question.question;
 
     const allAnswers = [...question.incorrect_answers, question.correct_answer];
@@ -87,11 +91,9 @@ function resetState() {
 function setNextQuestion() {
     resetState();
     showQuestion(questionsAll[currentQuestionIndex]);
+    currentQuestionIndex++
 };
 
 btnStartGame.addEventListener('click', startGame);
-btnNextQuestion.addEventListener('click', () => {
-    currentQuestionIndex++;
-    setNextQuestion();
-});
+btnNextQuestion.addEventListener('click', setNextQuestion);
 
