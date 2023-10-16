@@ -13,23 +13,23 @@ const answerBtns = document.getElementById('answer-buttons');
 
 // ---------- Set SPA
 
-const hideAll = () => {
+function hideAll() {
     homeBody.classList.add('hide');
     questionBody.classList.add('hide');
     resultsBody.classList.add('hide');
 };
 
-const showHomeBody = () => {
+function showHomeBody() {
     hideAll();
     homeBody.classList.remove('hide');
 };
 
-const showQuestionBody = () => {
+function showQuestionBody() {
     hideAll();
     questionBody.classList.remove('hide');
 };
 
-const showResultsBody = () => {
+function showResultsBody() {
     hideAll();
     resultsBody.classList.remove('hide');
 };
@@ -50,7 +50,7 @@ axios.get('https://opentdb.com/api.php?amount=10&category=20')
 
 let currentQuestionIndex;
 
-const startGame = () => {
+function startGame() {
     showQuestionBody();
     currentQuestionIndex = 0;
     setNextQuestion();
@@ -58,8 +58,7 @@ const startGame = () => {
 
 function showQuestion(question) {
     const txtPosition = document.getElementById('currentPosition');
-    txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`; // NO IMPRIME
-
+    txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`;
 
     questionTxt.innerText = question.question;
 
