@@ -1,3 +1,18 @@
-.hide {
+/* Roboto light, regular, bold */
+/* font-family: 'Roboto', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
+/* Roboto condensed light and bold */
+/* font-family: 'Roboto Condensed', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
+
+section.hide {
     display: none;
 };
+
+body {
+    font-family: 'Roboto', sans-serif;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('./assets/background/pexels-kwnos-iv-16785255.jpg');
+    background-color: aliceblue;
+}

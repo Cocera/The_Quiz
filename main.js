@@ -7,8 +7,9 @@ const questionBody = document.getElementById('question-body');
 const resultsBody = document.getElementById('results-body');
 
 const questionTxt = document.getElementById('question');
-const bttnStartGame = document.getElementById('start-game')
-const bttnNextQuestion = document.getElementById('next-question')
+const btnStartGame = document.getElementById('start-game');
+const btnNextQuestion = document.getElementById('next-question');
+const answerBtns = document.getElementById('answer-buttons');
 
 // ---------- Set SPA
 
@@ -42,24 +43,25 @@ resultsNav.addEventListener('click', showResultsBody);
 let questionsAll = [];
 
 axios.get('https://opentdb.com/api.php?amount=10&category=20')
-    .then(question => {
-            questionsAll = question.data.results;
-            console.log(questionsAll);
-            // question.data.results.forEach(object => {
-            //     questionsAll.push(object.question);
-            //     answersAll.push(object.correct_answer, object.incorrect_answers)
-            // })
-    })
+    .then(question => questionsAll = question.data.results)
     .catch(err => console.error(err,'ERROR'));
 
 // ---------- Start game
 
-const startGame = () => {
+let currentQuestionIndex;
 
-};
+// const startGame = () => {
+//     showQuestionBody();
+//     currentQuestionIndex = 0;
+//     setNextQuestion();
+// };
 
 const showQuestion = () => {
-    questionTxt.innerHTML = questionsAll.question;
-};
+    questionsAll.forEach(question => {
+        questionTxt.innerHTML = question.question;
+    })
+    // Faltaria imprimir las respuestas en los botones
+}
 
-bttnStartGame.addEventListener('click', startGame);
+btnStartGame.addEventListener('click', showQuestion);
+
