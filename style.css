@@ -21,6 +21,10 @@ body {
     /* background-image: url('./assets/background/pexels-kwnos-iv-16785255.jpg');
     object-fit: cover; */
     background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }
 
 nav {
@@ -37,6 +41,11 @@ nav {
     background-color: blue;
 }
 
+body>section {
+    padding: 50px;
+}
+
 nav>span:hover {
     color: yellow;
+    text-decoration: underline;
 }
