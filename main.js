@@ -43,25 +43,37 @@ resultsNav.addEventListener('click', showResultsBody);
 let questionsAll = [];
 
 axios.get('https://opentdb.com/api.php?amount=10&category=20')
-    .then(question => questionsAll = question.data.results)
+    .then(question => {
+        questionsAll = question.data.results;
+        console.log(questionsAll); // BORRAR MAS TARDE
+    })
     .catch(err => console.error(err,'ERROR'));
 
 // ---------- Start game
 
 let currentQuestionIndex;
 
-// const startGame = () => {
-//     showQuestionBody();
-//     currentQuestionIndex = 0;
-//     setNextQuestion();
-// };
+const startGame = () => {
+    showQuestionBody();
+    currentQuestionIndex = 0;
+    // setNextQuestion();
+    showQuestion();
+};
 
-const showQuestion = () => {
+const showQuestion = (question) => {
+    const allAnswersArr = [];
+
     questionsAll.forEach(question => {
-        questionTxt.innerHTML = question.question;
+        questionTxt.innerText = question.question;
+
+        const button = document.createElement('button');
+        button.innerText = question.incorrect_answer;
+        let questionAnswers = question.incorrect_answers;
+        questionAnswers.push(question.correct_answer);
+        allAnswersArr.push(questionAnswers)
+        console.log(allAnswersArr); // BORRAR MAS TARDE
     })
-    // Faltaria imprimir las respuestas en los botones
 }
 
-btnStartGame.addEventListener('click', showQuestion);
+btnStartGame.addEventListener('click', startGame);
 
