@@ -11,6 +11,7 @@
     padding: 0;
 }
 
+/* Esconder el SPA */
 section.hide {
     display: none;
 }
@@ -42,7 +43,7 @@ nav {
 }
 
 body>section {
-    padding: 50px;
+    padding: 0px 50px;
 }
 
 nav>span:hover {
