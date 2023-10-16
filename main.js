@@ -43,10 +43,7 @@ resultsNav.addEventListener('click', showResultsBody);
 let questionsAll = [];
 
 axios.get('https://opentdb.com/api.php?amount=10&category=20')
-    .then(question => {
-        questionsAll = question.data.results;
-        console.log(questionsAll); // BORRAR MAS TARDE
-    })
+    .then(question => questionsAll = question.data.results)
     .catch(err => console.error(err,'ERROR'));
 
 // ---------- Start game
@@ -56,24 +53,45 @@ let currentQuestionIndex;
 const startGame = () => {
     showQuestionBody();
     currentQuestionIndex = 0;
-    // setNextQuestion();
-    showQuestion();
+    setNextQuestion();
 };
 
-const showQuestion = (question) => {
-    const allAnswersArr = [];
+function showQuestion(question) {
+    questionTxt.innerText = question.question;
 
-    questionsAll.forEach(question => {
-        questionTxt.innerText = question.question;
+    const allAnswers = [...question.incorrect_answers, question.correct_answer];
+    allAnswers.sort(() => Math.random() - 0.5); // Baraja las respuestas
 
+    allAnswers.forEach((answer) => {
         const button = document.createElement('button');
-        button.innerText = question.incorrect_answer;
-        let questionAnswers = question.incorrect_answers;
-        questionAnswers.push(question.correct_answer);
-        allAnswersArr.push(questionAnswers)
-        console.log(allAnswersArr); // BORRAR MAS TARDE
-    })
-}
+        button.innerText = answer;
+        button.classList.add('btn-answer'); // CLASE PARA ESTILIZAR EN CSS
+        button.addEventListener('click', () => {
+            // Lógica para manejar la respuesta del usuario
+            if (answer === question.correct_answer) {
+                // Respuesta correcta
+                // Realiza la lógica de puntaje u otros
+            } else {
+                // Respuesta incorrecta
+                // Realiza la lógica de puntaje u otros
+            }
+        });
+        answerBtns.appendChild(button);
+    });
+};
+
+function resetState() {
+    answerBtns.innerHTML=""
+};
+
+function setNextQuestion() {
+    resetState();
+    showQuestion(questionsAll[currentQuestionIndex]);
+};
 
 btnStartGame.addEventListener('click', startGame);
+btnNextQuestion.addEventListener('click', () => {
+    currentQuestionIndex++;
+    setNextQuestion();
+});
 
