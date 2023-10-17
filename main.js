@@ -1,5 +1,4 @@
 const homeNav = document.getElementById('home-nav');
-const questionNav = document.getElementById('question-nav');
 const resultsNav = document.getElementById('results-nav');
 
 const homeBody = document.getElementById('home-body');
@@ -35,7 +34,6 @@ function showResultsBody() {
 };
 
 homeNav.addEventListener('click', showHomeBody);
-questionNav.addEventListener('click', showQuestionBody);
 resultsNav.addEventListener('click', showResultsBody);
 
 // ---------- Get API questions
