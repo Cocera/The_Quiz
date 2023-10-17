@@ -56,6 +56,8 @@ function startGame() {
     setNextQuestion();
 };
 
+arrUserAnswers = [];
+
 function showQuestion(question) {
     const txtPosition = document.getElementById('currentPosition');
     txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`;
@@ -70,22 +72,28 @@ function showQuestion(question) {
         button.innerText = answer;
         button.classList.add('btn-answer');
         button.addEventListener('click', () => {
-            currentQuestionIndex++
-            if (answer === question.correct_answer) {
-                button.classList.add("correct");
-                setTimeout(() => {
-                    setNextQuestion();
-                }, 1000)
-            } else {
-                button.classList.add("wrong");
-                setTimeout(() => {
-                    setNextQuestion();
-                }, 1000)
-            }
+            arrUserAnswers.push(button.innerText);
+            currentQuestionIndex++;
+            // -------------- Aqui no sabemos si es correcto o incorrecto, guardamos las respuestas para comprobar despues
+            setNextQuestion();
+            // -------------- Aqui pintamos al momento el correcto o incorrecto
+            // if (answer === question.correct_answer) {
+            //     button.classList.add("correct"); PONE BOTON VERDE
+            //     setTimeout(() => {
+            //         setNextQuestion();
+            //     }, 1000)
+            // } else {
+            //     button.classList.add("wrong"); PONE BOTON ROJO
+            //     setTimeout(() => {
+            //         setNextQuestion();
+            //     }, 1000)
+            // }
         });
         answerBtns.appendChild(button);
+        userAnswersUpload();
     });
 };
+
 
 function setNextQuestion() {
     answerBtns.innerHTML="";
@@ -95,6 +103,10 @@ function setNextQuestion() {
     };
     showQuestion(questionsAll[currentQuestionIndex]);
 };
+
+function userAnswersUpload() {
+    localStorage.setItem("userAnswers", JSON.stringify(arrUserAnswers));
+}
 
 btnStartGame.addEventListener('click', startGame);
 
