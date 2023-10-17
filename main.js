@@ -63,20 +63,25 @@ function showQuestion(question) {
     questionTxt.innerText = question.question;
 
     const allAnswers = [...question.incorrect_answers, question.correct_answer];
-    allAnswers.sort(() => Math.random() - 0.5); // Baraja las respuestas
+    allAnswers.sort(() => Math.random() - 0.5);
 
     allAnswers.forEach((answer) => {
         const button = document.createElement('button');
         button.innerText = answer;
         button.classList.add('btn-answer'); // CLASE PARA ESTILIZAR EN CSS
         button.addEventListener('click', () => {
-            // Lógica para manejar la respuesta del usuario
+            currentQuestionIndex++;
             if (answer === question.correct_answer) {
-                // Respuesta correcta
-                // Realiza la lógica de puntaje u otros
+                button.classList.add("correct");  
+                setTimeout(() => {
+                    setNextQuestion();
+                }, 2000)
             } else {
-                // Respuesta incorrecta
-                // Realiza la lógica de puntaje u otros
+                button.classList.add("wrong");
+
+                setTimeout(() => {
+                    setNextQuestion();
+                }, 2000)
             }
         });
         answerBtns.appendChild(button);
@@ -90,9 +95,8 @@ function resetState() {
 function setNextQuestion() {
     resetState();
     showQuestion(questionsAll[currentQuestionIndex]);
-    currentQuestionIndex++
 };
 
 btnStartGame.addEventListener('click', startGame);
-btnNextQuestion.addEventListener('click', setNextQuestion);
+// btnNextQuestion.addEventListener('click', setNextQuestion);
 

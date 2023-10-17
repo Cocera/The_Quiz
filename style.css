@@ -79,3 +79,11 @@ p#currentPosition {
     font-family: var(--type-second);
     font-weight: 300;
 }
+
+.correct {
+    background-color: greenyellow;
+}
+
+.wrong {
+    background-color: red;
+}
