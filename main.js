@@ -2,12 +2,12 @@ const homeNav = document.getElementById('home-nav');
 const resultsNav = document.getElementById('results-nav');
 
 const homeBody = document.getElementById('home-body');
+const categoriesBody = document.getElementById('categories-body');
 const questionBody = document.getElementById('question-body');
 const resultsBody = document.getElementById('results-body');
 
 const questionTxt = document.getElementById('question');
 const btnStartGame = document.getElementById('start-game');
-const btnNextQuestion = document.getElementById('next-question');
 const answerBtns = document.getElementById('answer-buttons');
 
 // ---------- Set SPA
@@ -16,12 +16,18 @@ function hideAll() {
     homeBody.classList.add('hide');
     questionBody.classList.add('hide');
     resultsBody.classList.add('hide');
+    categoriesBody.classList.add('hide');
 };
 
 function showHomeBody() {
     hideAll();
     homeBody.classList.remove('hide');
 };
+
+function showCategoriesBody() {
+    hideAll();
+    categoriesBody.classList.remove('hide');
+}
 
 function showQuestionBody() {
     hideAll();
@@ -52,6 +58,7 @@ function startGame() {
     showQuestionBody();
     currentQuestionIndex = 0;
     setNextQuestion();
+    showCategoriesBody();
 };
 
 arrUserAnswers = [];
