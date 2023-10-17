@@ -5,8 +5,15 @@
 /* font-family: 'Roboto Condensed', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
 
+:root {
+    --type-main: 'Roboto', sans-serif;
+    --type-second: 'Roboto Condensed', sans-serif;
+    --color-main: rgb(0, 255, 221);
+    --color-second: rgb(255, 136, 50);
+}
+
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--type-main);
     margin: 0;
     padding: 0;
 }
@@ -44,7 +51,7 @@ nav {
 }
 
 section {
-    padding: 5vw 0vw;
+    padding: 10px 0px;
 }
 
 body>section {
@@ -57,9 +64,9 @@ nav>span:hover {
 }
 
 button.btn-answer {
-    width: 90vw;
+    width: 80vw;
     height: 8vh;
-    margin: 0px 50px;
+    margin-bottom: 10px;
 }
 
 section#question {
@@ -69,6 +76,6 @@ section#question {
 }
 
 p#currentPosition {
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: var(--type-second);
     font-weight: 300;
 }
