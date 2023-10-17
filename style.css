@@ -1,21 +1,53 @@
-/* Roboto light, regular, bold */
-/* font-family: 'Roboto', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap');
-/* Roboto condensed light and bold */
-/* font-family: 'Roboto Condensed', sans-serif; */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;700&display=swap');
 
 :root {
+    /* set color values */
+    --color-main-dark: #27187E;
+    --color-main: #758BFD;
+    --color-main-light: #AEB8FE;
+    --color-main-lighter: #F1F2F6;
+    --color-secondary: #FF8600;
+    --color-secondary-light: #FFA217;
+
+    /* set font family */
     --type-main: 'Roboto', sans-serif;
     --type-second: 'Roboto Condensed', sans-serif;
-    --color-main: rgb(0, 255, 221);
-    --color-second: rgb(255, 136, 50);
+    
+    /* set base values */
+    --text-base-size: 1em;
+    --text-scale-ratio: 1.2;
+    
+    /* type scale */
+    --text-xs: calc(1em / (var(--text-scale-ratio) * var(--text-scale-ratio)));
+    --text-sm: calc(1em / var(--text-scale-ratio));
+    --text-md: calc(1em * var(--text-scale-ratio));
+    --text-lg: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
+    --text-xxxl: calc(1em * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio) * var(--text-scale-ratio));
 }
 
 * {
     font-family: var(--type-main);
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    font-size: var(--text-xxxl);
+}
+
+h2 {
+    font-size: var(--text-xxl);
+}
+
+h3 {
+    font-size: var(--text-xl);
+}
+
+p {
+    font-size: var(--text-base-size);
 }
 
 /* Esconder el SPA */
@@ -26,15 +58,23 @@ section.hide {
 body {
     width: 100vw;
     height: 100vh;
-    /* background-image: url('./assets/background/pexels-kwnos-iv-16785255.jpg');
-    object-fit: cover; */
-    background-color: aliceblue;
+    background-color: var(--color-main-light);
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     text-align: center;
 }
+
+section {
+    padding: 10px 0px;
+}
+
+body>section {
+    margin: 0px 50px;
+}
+
+/* -------------------- nav */
 
 nav {
     width: 100vw;
@@ -46,37 +86,56 @@ nav {
     position: absolute;
     left: 0px;
     bottom: 0px;
-    color: aliceblue;
-    background-color: blue;
+    color: var(--color-main-lighter);
+    background-color: var(--color-main-dark);
 }
 
-section {
-    padding: 10px 0px;
-}
-
-body>section {
-    margin: 0px 50px;
+nav>span {
+    font-size: var(--text-md);
 }
 
 nav>span:hover {
-    color: yellow;
-    text-decoration: underline;
+    color: var(--color-secondary);
+}
+
+/* -------------------- botones */
+
+button {
+    width: 80vw;
+    height: 8vh;
+    border-radius: 100vw;
+    border: none;
+    background-color: var(--color-main-lighter);
+
+    -webkit-box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
+    box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
+}
+
+button:hover {
+    background-color: var(--color-secondary-light);
 }
 
 button.btn-answer {
-    width: 80vw;
-    height: 8vh;
     margin-bottom: 10px;
+    font-size: var(--text-base-size);
+}
+
+button#start-game {
+    font-size: var(--text-md);
+    font-weight: 400;
+    margin-top: 5vw;
 }
 
 section#question {
     margin: 0px 50px;
     font-weight: 700;
-    font-size: 20px;
+    font-size: var(--text-md);
 }
 
 p#currentPosition {
     font-family: var(--type-second);
+    font-size: var(--text-scale-ratio);
     font-weight: 300;
 }
 
