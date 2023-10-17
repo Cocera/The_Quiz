@@ -68,35 +68,33 @@ function showQuestion(question) {
     allAnswers.forEach((answer) => {
         const button = document.createElement('button');
         button.innerText = answer;
-        button.classList.add('btn-answer'); // CLASE PARA ESTILIZAR EN CSS
+        button.classList.add('btn-answer');
         button.addEventListener('click', () => {
-            currentQuestionIndex++;
+            currentQuestionIndex++
             if (answer === question.correct_answer) {
-                button.classList.add("correct");  
+                button.classList.add("correct");
                 setTimeout(() => {
                     setNextQuestion();
-                }, 2000)
+                }, 1000)
             } else {
                 button.classList.add("wrong");
-
                 setTimeout(() => {
                     setNextQuestion();
-                }, 2000)
+                }, 1000)
             }
         });
         answerBtns.appendChild(button);
     });
 };
 
-function resetState() {
-    answerBtns.innerHTML=""
-};
-
 function setNextQuestion() {
-    resetState();
+    answerBtns.innerHTML="";
+    if (currentQuestionIndex==10) {
+        currentQuestionIndex = 0;
+        showResultsBody();
+    };
     showQuestion(questionsAll[currentQuestionIndex]);
 };
 
 btnStartGame.addEventListener('click', startGame);
-// btnNextQuestion.addEventListener('click', setNextQuestion);
 
