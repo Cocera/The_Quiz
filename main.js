@@ -10,6 +10,8 @@ const questionTxt = document.getElementById('question');
 const btnStartGame = document.getElementById('start-game');
 const answerBtns = document.getElementById('answer-buttons');
 
+
+
 // ---------- Set SPA
 
 function hideAll() {
@@ -42,25 +44,25 @@ function showResultsBody() {
 homeNav.addEventListener('click', showHomeBody);
 resultsNav.addEventListener('click', showResultsBody);
 
+
+
 // ---------- Get API questions
 
 let questionsAll = [];
 
-axios.get('https://opentdb.com/api.php?amount=10&category=20')
-    .then(question => questionsAll = question.data.results)
+function getQuestions(linkAPI) {
+    axios.get(linkAPI)
+    .then(question => {
+        questionsAll = question.data.results
+    })
     .catch(err => console.error(err,'ERROR'));
+}
+
+
 
 // ---------- Start game
 
 let currentQuestionIndex;
-
-function startGame() {
-    showQuestionBody();
-    currentQuestionIndex = 0;
-    setNextQuestion();
-    showCategoriesBody();
-};
-
 arrUserAnswers = [];
 
 function showQuestion(question) {
@@ -79,25 +81,16 @@ function showQuestion(question) {
         button.addEventListener('click', () => {
             arrUserAnswers.push(button.innerText);
             currentQuestionIndex++;
-            // -------------- Aqui no sabemos si es correcto o incorrecto, guardamos las respuestas para comprobar despues
             setNextQuestion();
-            // -------------- Aqui pintamos al momento el correcto o incorrecto
-            // if (answer === question.correct_answer) {
-            //     button.classList.add("correct"); PONE BOTON VERDE
-            //     setTimeout(() => {
-            //         setNextQuestion();
-            //     }, 1000)
-            // } else {
-            //     button.classList.add("wrong"); PONE BOTON ROJO
-            //     setTimeout(() => {
-            //         setNextQuestion();
-            //     }, 1000)
-            // }
         });
         answerBtns.appendChild(button);
         userAnswersUpload();
     });
 };
+
+
+
+
 
 
 function setNextQuestion() {
@@ -108,6 +101,46 @@ function setNextQuestion() {
     };
     showQuestion(questionsAll[currentQuestionIndex]);
 };
+
+
+
+
+
+
+
+function startGame() {
+    const inputUserName = document.getElementById('input-user-name').value;
+    if (inputUserName == "") {
+        console.error('Has de indicar un nombre') // sustituir por alerta
+    } else if (inputUserName != "") {
+        arrUserAnswers.push({user:inputUserName, answers:[]})
+        showCategoriesBody();
+    }
+    const btnCategoryMythology = document.getElementById('category-mythology');
+    const btnCategoryArt = document.getElementById('category-art');
+    const btnCategoryMusic = document.getElementById('category-music');
+
+    btnCategoryMythology.addEventListener('click', function() {
+        getQuestions('https://opentdb.com/api.php?amount=10&category=20&difficulty=medium');
+        currentQuestionIndex = 0;
+        setNextQuestion();
+    })
+    btnCategoryArt.addEventListener('click', function() {
+        getQuestions('https://opentdb.com/api.php?amount=10&category=25&difficulty=medium');
+        currentQuestionIndex = 0;
+        setNextQuestion();
+    })
+    btnCategoryMusic.addEventListener('click', function() {
+        getQuestions('https://opentdb.com/api.php?amount=10&category=12&difficulty=medium');
+        currentQuestionIndex = 0;
+        setNextQuestion();
+    })
+};
+
+
+
+
+
 
 function userAnswersUpload() {
     localStorage.setItem("userAnswers", JSON.stringify(arrUserAnswers));
