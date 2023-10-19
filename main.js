@@ -9,14 +9,19 @@ const resultsBody = document.getElementById('results-body');
 const btnStartGame = document.getElementById('start-game');
 const answerBtns = document.getElementById('answer-buttons');
 
+const valueUserName = document.getElementById('input-user-name');
+
+
 
 
 // ---------- Global scope variables
 
 let currentQuestionIndex;
-let arrUserAnswers = [];
-let correctAnswersCounter = 0;
+let arrUsersResults = []; 
 let questionsAll = [];
+
+let userName = '';
+let correctAnswersCounter = 0;
 
 
 
@@ -69,6 +74,7 @@ function changeBackgroundImg(srcImg) {
     img.setAttribute('src', srcImg)
 };
 
+
 async function getQuestions(linkAPI) {
     try {
         const response = await axios.get(linkAPI);
@@ -86,8 +92,6 @@ async function setCategory(linkApi, linkImg) {
 };
 
 
-
-
 function printRanking(arrUsersRanking) {
     const tableResults = document.getElementById('tableResults');
 
@@ -100,7 +104,7 @@ function printRanking(arrUsersRanking) {
     })
 
     showResultsBody()
-}
+};
 
 
 
@@ -110,6 +114,7 @@ function printRanking(arrUsersRanking) {
 // ---------- Start game
 
 function showQuestion(question) {
+    valueUserName.value="";
 
     const questionTxt = document.getElementById('question');
     const txtPosition = document.getElementById('currentPosition');
@@ -123,13 +128,15 @@ function showQuestion(question) {
 
     allAnswers.forEach((answer) => {
         const button = document.createElement('button');
-        button.innerText = answer;
+        button.innerHTML = answer;
         button.classList.add('btn-answer');
         button.addEventListener('click', () => {
 
             if (button.innerText == question.correct_answer) {
                 correctAnswersCounter++; // Mostrar el color si es true o false tu respuesta
-            }
+            } else if (button.innerText != question.correct_answer) {
+                correctAnswersCounter -= 0.5;
+            };
 
             currentQuestionIndex++;
 
@@ -140,6 +147,7 @@ function showQuestion(question) {
 
         answerBtns.appendChild(button);
     });
+    saveUsersScores(userName, correctAnswersCounter);
 };
 
 
@@ -157,7 +165,6 @@ function setNextQuestion() {
 
 
 function startGame() {
-    const valueUserName = document.getElementById('input-user-name');
 
     currentQuestionIndex = 0;
     correctAnswersCounter = 0;
@@ -165,8 +172,8 @@ function startGame() {
     if (valueUserName.value == "") {
         console.error('User name needed')
     } else if (valueUserName.value != "") {
+        userName = valueUserName.value;
         showCategoriesBody();
-        valueUserName.value="";
     }
 
     const btnCategoryMythology = document.getElementById('category-mythology');
@@ -199,6 +206,12 @@ function startGame() {
             );
         } catch (err) {console.error(err,'Ups! Something went wrong :(')}
     });
+};
+
+function saveUsersScores(name, score) {
+    const userResult = { user: name, score: score };
+    arrUsersResults.push(userResult);
+    localStorage.setItem('usersResults', JSON.stringify(arrUsersResults));
 };
 
 
