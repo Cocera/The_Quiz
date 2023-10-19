@@ -51,9 +51,11 @@ resultsNav.addEventListener('click', showResultsBody);
 let questionsAll = [];
 
 function getQuestions(linkAPI) {
+    console.log('Llega a getQuestions') // Probar si se acciona
     axios.get(linkAPI)
     .then(question => {
-        questionsAll = question.data.results
+        questionsAll = question.data.results;
+        console.log(questionsAll);  // Probar si se acciona
     })
     .catch(err => console.error(err,'ERROR'));
 }
@@ -63,13 +65,16 @@ function getQuestions(linkAPI) {
 // ---------- Start game
 
 let currentQuestionIndex;
-arrUserAnswers = [];
+let arrUserAnswers = [];
+let correctAnswers = 0;
+
 
 function showQuestion(question) {
+    console.log('Llega a showQuestion')
     const txtPosition = document.getElementById('currentPosition');
     txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`;
 
-    questionTxt.innerText = question.question;
+    questionTxt.innerHTML = question.question; // con .innerText saca simbolos raros
 
     const allAnswers = [...question.incorrect_answers, question.correct_answer];
     allAnswers.sort(() => Math.random() - 0.5);
@@ -94,12 +99,15 @@ function showQuestion(question) {
 
 
 function setNextQuestion() {
+    console.log('Llega a setNextQuestion')
     answerBtns.innerHTML="";
     if (currentQuestionIndex==10) {
         currentQuestionIndex = 0;
         showResultsBody();
-    };
-    showQuestion(questionsAll[currentQuestionIndex]);
+    } else {
+        showQuestionBody();
+        showQuestion(questionsAll[currentQuestionIndex]);
+    }
 };
 
 
@@ -110,27 +118,34 @@ function setNextQuestion() {
 
 function startGame() {
     const inputUserName = document.getElementById('input-user-name').value;
+
     if (inputUserName == "") {
         console.error('Has de indicar un nombre') // sustituir por alerta
     } else if (inputUserName != "") {
-        arrUserAnswers.push({user:inputUserName, answers:[]})
+        // arrUserAnswers.push({user:inputUserName, answers:[]}) // Se puede crear un constructor para guardar la info?
         showCategoriesBody();
     }
+
     const btnCategoryMythology = document.getElementById('category-mythology');
     const btnCategoryArt = document.getElementById('category-art');
     const btnCategoryMusic = document.getElementById('category-music');
 
     btnCategoryMythology.addEventListener('click', function() {
+        console.log('Has elegido Mitologia'); 
         getQuestions('https://opentdb.com/api.php?amount=10&category=20&difficulty=medium');
         currentQuestionIndex = 0;
         setNextQuestion();
     })
+
     btnCategoryArt.addEventListener('click', function() {
+        console.log('Has elegido Arte') // Probar si se acciona
         getQuestions('https://opentdb.com/api.php?amount=10&category=25&difficulty=medium');
         currentQuestionIndex = 0;
         setNextQuestion();
     })
+
     btnCategoryMusic.addEventListener('click', function() {
+        console.log('Has elegido Musica') // Probar si se acciona
         getQuestions('https://opentdb.com/api.php?amount=10&category=12&difficulty=medium');
         currentQuestionIndex = 0;
         setNextQuestion();

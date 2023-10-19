@@ -167,7 +167,6 @@ button:hover {
 }
 
 button.btn-answer {
-    margin-bottom: 10px;
     font-size: var(--text-base-size);
 }
 
