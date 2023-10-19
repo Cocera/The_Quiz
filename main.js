@@ -1,5 +1,6 @@
 const homeNav = document.getElementById('home-nav');
 const resultsNav = document.getElementById('results-nav');
+const btnClearNav = document.getElementById('clear-nav');
 
 const homeBody = document.getElementById('home-body');
 const categoriesBody = document.getElementById('categories-body');
@@ -92,19 +93,35 @@ async function setCategory(linkApi, linkImg) {
 };
 
 
-function printRanking(arrUsersRanking) {
-    const tableResults = document.getElementById('tableResults');
+// function printRanking() {
+//     const tableResults = document.getElementById('tableResults');
+//     const downloadUsers = JSON.parse(localStorage.getItem('usersResults')) || [];
 
-    arrUsersRanking.forEach((user, index), () => {
+//     downloadUsers.forEach((user, index), () => {
+//         tableResults.innerHTML += `
+//         <tr>
+//             <td>${user.user}</td>
+//             <td>${user.score} /10</td>
+//         </tr>`
+//     })
+
+//     showResultsBody()
+// };
+
+function printRanking() {
+    const tableResults = document.getElementById('tableResults');
+    const downloadUsers = JSON.parse(localStorage.getItem('usersResults')) || [];
+
+    tableResults.innerHTML = ''; // Limpiamos la tabla antes de agregar nuevos datos
+
+    downloadUsers.forEach(user => {
         tableResults.innerHTML += `
         <tr>
             <td>${user.user}</td>
-            <td>${user.score} /10</td>
-        </tr>`
-    })
-
-    showResultsBody()
-};
+            <td>${user.score} pt.</td>
+        </tr>`;
+    });
+}
 
 
 
@@ -133,7 +150,7 @@ function showQuestion(question) {
         button.addEventListener('click', () => {
 
             if (button.innerText == question.correct_answer) {
-                correctAnswersCounter++; // Mostrar el color si es true o false tu respuesta
+                correctAnswersCounter+= 5 // Mostrar el color si es true o false tu respuesta
             } else if (button.innerText != question.correct_answer) {
                 correctAnswersCounter -= 0.5;
             };
@@ -156,7 +173,6 @@ function setNextQuestion() {
     answerBtns.innerHTML="";
     if (currentQuestionIndex == 10) {
         showResultsBody();
-        printRanking() // falta apsar el argumento de la array resultados
     } else if (currentQuestionIndex < 10) {
         showQuestionBody();
         showQuestion(questionsAll[currentQuestionIndex]);
@@ -209,11 +225,17 @@ function startGame() {
 };
 
 function saveUsersScores(name, score) {
-    const userResult = { user: name, score: score };
-    arrUsersResults.push(userResult);
-    localStorage.setItem('usersResults', JSON.stringify(arrUsersResults));
+    const userResult = { user: name, score: score};
+    if (currentQuestionIndex==9) {
+        arrUsersResults.push(userResult);
+        localStorage.setItem('usersResults', JSON.stringify(arrUsersResults));
+    };
+    printRanking()
 };
 
 
 btnStartGame.addEventListener('click', startGame);
+btnClearNav.addEventListener('click', function() {
+    localStorage.removeItem('usersResults');
+});
 
