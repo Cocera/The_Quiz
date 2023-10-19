@@ -93,21 +93,6 @@ async function setCategory(linkApi, linkImg) {
 };
 
 
-// function printRanking() {
-//     const tableResults = document.getElementById('tableResults');
-//     const downloadUsers = JSON.parse(localStorage.getItem('usersResults')) || [];
-
-//     downloadUsers.forEach((user, index), () => {
-//         tableResults.innerHTML += `
-//         <tr>
-//             <td>${user.user}</td>
-//             <td>${user.score} /10</td>
-//         </tr>`
-//     })
-
-//     showResultsBody()
-// };
-
 function printRanking() {
     const tableResults = document.getElementById('tableResults');
     const downloadUsers = JSON.parse(localStorage.getItem('usersResults')) || [];
