@@ -135,7 +135,7 @@ function showQuestion(question) {
 
             setTimeout(() => {
                 setNextQuestion();;
-              }, "500");
+              }, 500);
         });
 
         answerBtns.appendChild(button);
