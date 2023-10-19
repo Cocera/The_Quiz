@@ -165,7 +165,7 @@ function startGame() {
     correctAnswersCounter = 0;
 
     if (valueUserName.value == "") {
-        console.error('Has de indicar un nombre') // sustituir por alerta
+        {console.error(err,'Ups! Something went wrong :(')}
     } else if (valueUserName.value != "") {
         showCategoriesBody();
         valueUserName.value="";
@@ -175,30 +175,32 @@ function startGame() {
     const btnCategoryArt = document.getElementById('category-art');
     const btnCategoryMusic = document.getElementById('category-music');
 
-    btnCategoryMythology.addEventListener('click', async function() { // volver a dejar como antes, sin async
+    btnCategoryMythology.addEventListener('click', async function() {
         try {
-            setCategory(
+            await setCategory(
                 'https://opentdb.com/api.php?amount=10&category=20&difficulty=medium',
                 'https://images.pexels.com/photos/3264735/pexels-photo-3264735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
             );
-        } catch (error) {
-            console.error('ERROR');
-        }
-    })
+        } catch (err) {console.error(err,'Ups! Something went wrong :(')}
+    });
 
-    btnCategoryArt.addEventListener('click', function() {
-        setCategory(
-            'https://opentdb.com/api.php?amount=10&category=25&difficulty=medium',
-            'https://images.pexels.com/photos/2372982/pexels-photo-2372982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-        );
-    })
+    btnCategoryArt.addEventListener('click', async function() {
+        try {
+            await setCategory(
+                'https://opentdb.com/api.php?amount=10&category=25&difficulty=medium',
+                'https://images.pexels.com/photos/2372982/pexels-photo-2372982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            );
+        } catch (err) {console.error(err,'Ups! Something went wrong :(')} 
+    });
 
-    btnCategoryMusic.addEventListener('click', function() {
-        setCategory(
-            'https://opentdb.com/api.php?amount=10&category=12&difficulty=medium',
-            'https://images.pexels.com/photos/4709822/pexels-photo-4709822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-        );
-    })
+    btnCategoryMusic.addEventListener('click', async function() {
+        try {
+            await setCategory(
+                'https://opentdb.com/api.php?amount=10&category=12&difficulty=medium',
+                'https://images.pexels.com/photos/4709822/pexels-photo-4709822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            );
+        } catch (err) {console.error(err,'Ups! Something went wrong :(')}
+    });
 };
 
 
