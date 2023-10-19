@@ -88,7 +88,6 @@ function showQuestion(question) {
 
             arrUserAnswers.push(button.innerText);
 
-            disableButtons();
 
             currentQuestionIndex++;
 
@@ -105,13 +104,6 @@ function showQuestion(question) {
 
 
 
-function disableButtons() {
-    buttonsDis = document.getElementsByClassName('btn-answer');
-    buttonDis.disabled = true;
-};
-
-
-
 
 
 
@@ -125,6 +117,15 @@ function setNextQuestion() {
         showQuestion(questionsAll[currentQuestionIndex]);
     }
 };
+
+
+
+
+
+function changeBackgroundImg(srcImg) {
+    const img = document.getElementById('backgroundImg');
+    img.setAttribute('src', srcImg)
+}
 
 
 
@@ -151,19 +152,27 @@ function startGame() {
 
     btnCategoryMythology.addEventListener('click', function() {
         getQuestions('https://opentdb.com/api.php?amount=10&category=20&difficulty=medium');
+        changeBackgroundImg('https://images.pexels.com/photos/3264735/pexels-photo-3264735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         setNextQuestion();
     })
 
     btnCategoryArt.addEventListener('click', function() {
         getQuestions('https://opentdb.com/api.php?amount=10&category=25&difficulty=medium');
+        changeBackgroundImg('https://images.pexels.com/photos/2372982/pexels-photo-2372982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         setNextQuestion();
     })
 
     btnCategoryMusic.addEventListener('click', function() {
         getQuestions('https://opentdb.com/api.php?amount=10&category=12&difficulty=medium');
+        changeBackgroundImg('https://images.pexels.com/photos/4709822/pexels-photo-4709822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
         setNextQuestion();
     })
 };
+
+
+
+
+
 
 
 
