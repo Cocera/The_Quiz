@@ -88,10 +88,10 @@ async function setCategory(linkApi, linkImg) {
 
 
 
-function printRanking() {
+function printRanking(arrUsersRanking) {
     const tableResults = document.getElementById('tableResults');
 
-    getResults.forEach(user, () => {
+    arrUsersRanking.forEach((user, index), () => {
         tableResults.innerHTML += `
         <tr>
             <td>${user.user}</td>
@@ -146,12 +146,10 @@ function showQuestion(question) {
 
 function setNextQuestion() {
     answerBtns.innerHTML="";
-    if (currentQuestionIndex==10) {
-        console.log('IF setNextQuestion')
-        currentQuestionIndex = 0;
-        printRanking()
-    } else {
-        console.log('ELSE setNextQuestion')
+    if (currentQuestionIndex == 10) {
+        showResultsBody();
+        printRanking() // falta apsar el argumento de la array resultados
+    } else if (currentQuestionIndex < 10) {
         showQuestionBody();
         showQuestion(questionsAll[currentQuestionIndex]);
     }
@@ -165,7 +163,7 @@ function startGame() {
     correctAnswersCounter = 0;
 
     if (valueUserName.value == "") {
-        {console.error(err,'Ups! Something went wrong :(')}
+        console.error('User name needed')
     } else if (valueUserName.value != "") {
         showCategoriesBody();
         valueUserName.value="";
