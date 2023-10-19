@@ -64,7 +64,7 @@ function getQuestions(linkAPI) {
 
 let currentQuestionIndex;
 let arrUserAnswers = [];
-let correctAnswers = 0;
+let correctAnswersCounter = 0;
 
 
 function showQuestion(question) {
@@ -81,13 +81,33 @@ function showQuestion(question) {
         button.innerText = answer;
         button.classList.add('btn-answer');
         button.addEventListener('click', () => {
+
+            if (button.innerText == question.correct_answer) {
+                correctAnswersCounter++;
+            }
+
             arrUserAnswers.push(button.innerText);
+
+            disableButtons();
+
             currentQuestionIndex++;
-            setNextQuestion();
+
+            setTimeout(() => {
+                setNextQuestion();;
+              }, "500");
         });
+
         answerBtns.appendChild(button);
         userAnswersUpload();
     });
+};
+
+
+
+
+function disableButtons() {
+    buttonsDis = document.getElementsByClassName('btn-answer');
+    buttonDis.disabled = true;
 };
 
 
@@ -116,6 +136,7 @@ function startGame() {
     const valueUserName = document.getElementById('input-user-name').value;
 
     currentQuestionIndex = 0;
+    correctAnswersCounter = 0;
 
     if (valueUserName == "") {
         console.error('Has de indicar un nombre') // sustituir por alerta
