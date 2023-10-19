@@ -20,28 +20,6 @@ let questionsAll = [];
 
 
 
-// ---------- Specific function actions
-
-function changeBackgroundImg(srcImg) {
-    const img = document.getElementById('backgroundImg');
-    img.setAttribute('src', srcImg)
-}
-
-function getQuestions(linkAPI) {
-    axios.get(linkAPI)
-    .then(question => {
-        questionsAll = question.data.results;
-    })
-    .catch(err => console.error(err,'ERROR'));
-}
-
-function setCategory(linkApi, linkImg) {
-    getQuestions(linkApi);
-    changeBackgroundImg(linkImg);
-    setNextQuestion();
-};
-
-
 
 // ---------- Set SPA
 
@@ -84,6 +62,49 @@ resultsNav.addEventListener('click', showResultsBody);
 
 
 
+// ---------- Specific function actions
+
+function changeBackgroundImg(srcImg) {
+    const img = document.getElementById('backgroundImg');
+    img.setAttribute('src', srcImg)
+}
+
+function getQuestions(linkAPI) {
+    axios.get(linkAPI)
+    .then(question => {
+        questionsAll = question.data.results;
+        return questionsAll;
+    })
+    .catch(err => console.error(err,'ERROR'));
+}
+
+function setCategory(linkApi, linkImg) {
+
+    getQuestions(linkApi);
+    changeBackgroundImg(linkImg);  
+    setNextQuestion();  
+
+};
+
+
+
+
+function printRanking() {
+    const tableResults = document.getElementById('tableResults');
+    const getResults = JSON.parse(localStorage.getItem('arrUsersAnswers') || []);
+
+    getResults.forEach(user, () => {
+        tableResults.innerHTML += `
+        <tr>
+            <td>${user.user}</td>
+            <td>${user.score} /10</td>
+        </tr>`
+    })
+
+    showResultsBody()
+}
+
+
 
 
 
@@ -97,7 +118,7 @@ function showQuestion(question) {
     
     txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`;
 
-    questionTxt.innerHTML = question.question; // con .innerText saca simbolos raros
+    questionTxt.innerHTML = question.question;
 
     const allAnswers = [...question.incorrect_answers, question.correct_answer];
     allAnswers.sort(() => Math.random() - 0.5);
@@ -109,11 +130,8 @@ function showQuestion(question) {
         button.addEventListener('click', () => {
 
             if (button.innerText == question.correct_answer) {
-                correctAnswersCounter++;
+                correctAnswersCounter++; // Mostrar el color si es true o false tu respuesta
             }
-
-            arrUserAnswers.push(button.innerText);
-
 
             currentQuestionIndex++;
 
@@ -123,7 +141,6 @@ function showQuestion(question) {
         });
 
         answerBtns.appendChild(button);
-        userAnswersUpload();
     });
 };
 
@@ -133,7 +150,7 @@ function setNextQuestion() {
     answerBtns.innerHTML="";
     if (currentQuestionIndex==10) {
         currentQuestionIndex = 0;
-        showResultsBody();
+        printRanking()
     } else {
         showQuestionBody();
         showQuestion(questionsAll[currentQuestionIndex]);
@@ -142,29 +159,31 @@ function setNextQuestion() {
 
 
 function startGame() {
-    const valueUserName = document.getElementById('input-user-name').value;
+    const valueUserName = document.getElementById('input-user-name');
 
     currentQuestionIndex = 0;
     correctAnswersCounter = 0;
 
-    if (valueUserName == "") {
+    if (valueUserName.value == "") {
         console.error('Has de indicar un nombre') // sustituir por alerta
-    } else if (valueUserName != "") {
-        arrUserAnswers.push({user:valueUserName, answers:[]}) // Se puede crear un constructor para guardar la info?
-        console.log(arrUserAnswers);
+    } else if (valueUserName.value != "") {
         showCategoriesBody();
+        valueUserName.value="";
     }
 
     const btnCategoryMythology = document.getElementById('category-mythology');
     const btnCategoryArt = document.getElementById('category-art');
     const btnCategoryMusic = document.getElementById('category-music');
 
-    btnCategoryMythology.addEventListener('click', function() {
-        setCategory(
-            'https://opentdb.com/api.php?amount=10&category=20&difficulty=medium',
-            'https://images.pexels.com/photos/3264735/pexels-photo-3264735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
-        );
-        setNextQuestion();
+    btnCategoryMythology.addEventListener('click', async function() { // volver a dejar como antes, sin async
+        try {
+            setCategory(
+                'https://opentdb.com/api.php?amount=10&category=20&difficulty=medium',
+                'https://images.pexels.com/photos/3264735/pexels-photo-3264735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
+            );
+        } catch (error) {
+            console.error('ERROR');
+        }
     })
 
     btnCategoryArt.addEventListener('click', function() {
@@ -172,7 +191,6 @@ function startGame() {
             'https://opentdb.com/api.php?amount=10&category=25&difficulty=medium',
             'https://images.pexels.com/photos/2372982/pexels-photo-2372982.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
         );
-        setNextQuestion();
     })
 
     btnCategoryMusic.addEventListener('click', function() {
@@ -180,17 +198,9 @@ function startGame() {
             'https://opentdb.com/api.php?amount=10&category=12&difficulty=medium',
             'https://images.pexels.com/photos/4709822/pexels-photo-4709822.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2'
         );
-        setNextQuestion();
     })
 };
 
-
-
-
-function userAnswersUpload() {
-    localStorage.setItem("userAnswers", JSON.stringify(arrUserAnswers));
-    console.log(arrUserAnswers);
-}
 
 btnStartGame.addEventListener('click', startGame);
 
