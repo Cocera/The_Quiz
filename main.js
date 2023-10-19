@@ -97,7 +97,7 @@ function printRanking() {
     const tableResults = document.getElementById('tableResults');
     const downloadUsers = JSON.parse(localStorage.getItem('usersResults')) || [];
 
-    tableResults.innerHTML = ''; // Limpiamos la tabla antes de agregar nuevos datos
+    tableResults.innerHTML = ''; 
 
     downloadUsers.forEach(user => {
         tableResults.innerHTML += `

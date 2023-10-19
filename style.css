@@ -198,18 +198,14 @@ p#currentPosition {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: var(--text-xl);
+    border: 1px solid var(--color-main-dark);
+    border-collapse: collapse;
+}
   
   
   
