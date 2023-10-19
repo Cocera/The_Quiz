@@ -51,11 +51,9 @@ resultsNav.addEventListener('click', showResultsBody);
 let questionsAll = [];
 
 function getQuestions(linkAPI) {
-    console.log('Llega a getQuestions') // Probar si se acciona
     axios.get(linkAPI)
     .then(question => {
         questionsAll = question.data.results;
-        console.log(questionsAll);  // Probar si se acciona
     })
     .catch(err => console.error(err,'ERROR'));
 }
@@ -70,7 +68,6 @@ let correctAnswers = 0;
 
 
 function showQuestion(question) {
-    console.log('Llega a showQuestion')
     const txtPosition = document.getElementById('currentPosition');
     txtPosition.innerText = `Question ${currentQuestionIndex+1}/10`;
 
@@ -99,7 +96,6 @@ function showQuestion(question) {
 
 
 function setNextQuestion() {
-    console.log('Llega a setNextQuestion')
     answerBtns.innerHTML="";
     if (currentQuestionIndex==10) {
         currentQuestionIndex = 0;
@@ -117,12 +113,14 @@ function setNextQuestion() {
 
 
 function startGame() {
-    const inputUserName = document.getElementById('input-user-name').value;
+    const valueUserName = document.getElementById('input-user-name').value;
 
-    if (inputUserName == "") {
+    currentQuestionIndex = 0;
+
+    if (valueUserName == "") {
         console.error('Has de indicar un nombre') // sustituir por alerta
-    } else if (inputUserName != "") {
-        // arrUserAnswers.push({user:inputUserName, answers:[]}) // Se puede crear un constructor para guardar la info?
+    } else if (valueUserName != "") {
+        // arrUserAnswers.push({user:valueUserName, answers:[]}) // Se puede crear un constructor para guardar la info?
         showCategoriesBody();
     }
 
@@ -131,23 +129,17 @@ function startGame() {
     const btnCategoryMusic = document.getElementById('category-music');
 
     btnCategoryMythology.addEventListener('click', function() {
-        console.log('Has elegido Mitologia'); 
         getQuestions('https://opentdb.com/api.php?amount=10&category=20&difficulty=medium');
-        currentQuestionIndex = 0;
         setNextQuestion();
     })
 
     btnCategoryArt.addEventListener('click', function() {
-        console.log('Has elegido Arte') // Probar si se acciona
         getQuestions('https://opentdb.com/api.php?amount=10&category=25&difficulty=medium');
-        currentQuestionIndex = 0;
         setNextQuestion();
     })
 
     btnCategoryMusic.addEventListener('click', function() {
-        console.log('Has elegido Musica') // Probar si se acciona
         getQuestions('https://opentdb.com/api.php?amount=10&category=12&difficulty=medium');
-        currentQuestionIndex = 0;
         setNextQuestion();
     })
 };

@@ -136,35 +136,52 @@ nav>div#btn-nav:hover {
 
 /* -------------------- botones */
 
-button {
-    margin-top: 5vw;
+
+input {
+    text-align: center;
 }
 
 button, input {
+    margin-top: 5vw;
     width: 80vw;
     height: 8vh;
     border-radius: 15px;
     border: none;
     background-color: rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(0.5rem); 
-
-    -webkit-box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
-    -moz-box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
     box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
 }
 
-input {
-    font-family: var(--type-main);
-    font-size: var(--text-md);
-    font-weight: 400;
-    /* Este no va */
-    color: var(--color-main);
+button:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+    font-weight: 700;
+    box-shadow:  0px 2px 4px 0px rgba(0,0,0,0.3);
 }
 
-button:hover {
-    background-color: rgba(255, 255, 255, 0.6);
+button:active {
+    background-color: rgba(255, 255, 255, 0.7);
     font-weight: 700;
 }
+
+/* .button {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #04AA6D;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #999;
+  }
+  
+  .button:hover {background-color: #3e8e41}
+  
+  .button:active {
+    background-color: #3e8e41;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px); */
 
 button.btn-answer {
     font-size: var(--text-base-size);
@@ -187,12 +204,4 @@ p#currentPosition {
     font-size: var(--text-scale-ratio);
     font-weight: 300;
     color: var(--color-main-dark);
-}
-
-.correct {
-    background-color: greenyellow;
-}
-
-.wrong {
-    background-color: red;
 }
