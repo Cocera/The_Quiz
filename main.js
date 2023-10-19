@@ -237,5 +237,10 @@ function saveUsersScores(name, score) {
 btnStartGame.addEventListener('click', startGame);
 btnClearNav.addEventListener('click', function() {
     localStorage.removeItem('usersResults');
+    alertNotification.classList.remove('hide')
+    alertNotification.innerText = 'Ooooh! Users deleted :('
+    setTimeout(() => {
+        alertNotification.classList.add('hide');
+    }, 1000);
 });
 
