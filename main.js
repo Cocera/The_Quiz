@@ -7,6 +7,8 @@ const questionBody = document.getElementById('question-body');
 const resultsBody = document.getElementById('results-body');
 
 const btnStartGame = document.getElementById('start-game');
+const answerBtns = document.getElementById('answer-buttons');
+
 
 
 // ---------- Global scope variables
@@ -90,7 +92,6 @@ resultsNav.addEventListener('click', showResultsBody);
 
 function showQuestion(question) {
 
-    const answerBtns = document.getElementById('answer-buttons');
     const questionTxt = document.getElementById('question');
     const txtPosition = document.getElementById('currentPosition');
     
@@ -188,6 +189,7 @@ function startGame() {
 
 function userAnswersUpload() {
     localStorage.setItem("userAnswers", JSON.stringify(arrUserAnswers));
+    console.log(arrUserAnswers);
 }
 
 btnStartGame.addEventListener('click', startGame);
