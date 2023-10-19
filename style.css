@@ -136,18 +136,14 @@ nav>div#btn-nav:hover {
 
 /* -------------------- botones */
 
-
-input {
-    text-align: center;
-}
-
 button, input {
     margin-top: 5vw;
     width: 80vw;
     height: 8vh;
     border-radius: 15px;
     border: none;
-    background-color: rgba(255, 255, 255, 0.3);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.467);
     backdrop-filter: blur(0.5rem); 
     box-shadow:  0px 3px 7px 0px rgba(0,0,0,0.3);
 }
