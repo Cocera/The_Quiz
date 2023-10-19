@@ -67,23 +67,22 @@ resultsNav.addEventListener('click', showResultsBody);
 function changeBackgroundImg(srcImg) {
     const img = document.getElementById('backgroundImg');
     img.setAttribute('src', srcImg)
-}
+};
 
-function getQuestions(linkAPI) {
-    axios.get(linkAPI)
-    .then(question => {
-        questionsAll = question.data.results;
-        return questionsAll;
-    })
-    .catch(err => console.error(err,'ERROR'));
-}
-
-function setCategory(linkApi, linkImg) {
-
-    getQuestions(linkApi);
-    changeBackgroundImg(linkImg);  
-    setNextQuestion();  
-
+async function getQuestions(linkAPI) {
+    try {
+        const response = await axios.get(linkAPI);
+        questionsAll = response.data.results;
+    } catch (err) {console.error(err,'Ups! Something went wrong :(')};      
+};
+    
+    
+async function setCategory(linkApi, linkImg) {
+    try {
+        await getQuestions(linkApi);
+        changeBackgroundImg(linkImg);  
+        setNextQuestion();  
+    } catch (err) {console.error(err,'Ups! Something went wrong :(')}
 };
 
 
@@ -91,7 +90,6 @@ function setCategory(linkApi, linkImg) {
 
 function printRanking() {
     const tableResults = document.getElementById('tableResults');
-    const getResults = JSON.parse(localStorage.getItem('arrUsersAnswers') || []);
 
     getResults.forEach(user, () => {
         tableResults.innerHTML += `
@@ -149,9 +147,11 @@ function showQuestion(question) {
 function setNextQuestion() {
     answerBtns.innerHTML="";
     if (currentQuestionIndex==10) {
+        console.log('IF setNextQuestion')
         currentQuestionIndex = 0;
         printRanking()
     } else {
+        console.log('ELSE setNextQuestion')
         showQuestionBody();
         showQuestion(questionsAll[currentQuestionIndex]);
     }
