@@ -1,9 +1,7 @@
 # The QUIZ
-Welcome to our exciting trivia quiz web application - "QuizMaster." Whether you're a trivia enthusiast, looking to test your knowledge, or simply seeking a fun and engaging way to spend your time, QuizMaster has you covered. This web-based game is designed to challenge your wits and provide an enjoyable learning experience on a variety of topics.
+Welcome to my trivial quiz web application! This project is an interactive Single Page Application (SPA) that offers an immersive and educational quiz-taking experience. With a user-friendly interface and a diverse range of categories, the application is suitable for all knowledge levels and ages. The aim is to put into practice all the skills acquired in JavaScript.
 
-### Description:
-
-This project is an interactive Single Page Application (SPA) that offers an immersive and educational quiz-taking experience. With a user-friendly interface and a diverse range of categories, the application is suitable for all knowledge levels and ages. The aim is to put into practice all the skills acquired in JavaScript.
+![]()
 
 ### Technologies Used:
 
