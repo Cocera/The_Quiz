@@ -97,6 +97,16 @@ function printRanking() {
     });
 }
 
+function setNextQuestion() {
+    answerBtns.innerHTML="";
+    if (currentQuestionIndex == 10) {
+        showResultsBody();
+    } else if (currentQuestionIndex < 10) {
+        showQuestionBody();
+        showQuestion(questionsAll[currentQuestionIndex]);
+    }
+};
+
 
 
 // ---------- Start game
@@ -121,7 +131,7 @@ function showQuestion(question) {
         button.addEventListener('click', () => {
 
             if (button.innerText == question.correct_answer) {
-                correctAnswersCounter+= 5 // Mostrar el color si es true o false tu respuesta
+                correctAnswersCounter+= 5
             } else if (button.innerText != question.correct_answer) {
                 correctAnswersCounter -= 0.5;
             };
@@ -139,15 +149,6 @@ function showQuestion(question) {
 };
 
 
-function setNextQuestion() {
-    answerBtns.innerHTML="";
-    if (currentQuestionIndex == 10) {
-        showResultsBody();
-    } else if (currentQuestionIndex < 10) {
-        showQuestionBody();
-        showQuestion(questionsAll[currentQuestionIndex]);
-    }
-};
 
 
 function startGame() {
