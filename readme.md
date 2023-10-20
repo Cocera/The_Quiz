@@ -1,7 +1,7 @@
 # The QUIZ
 Welcome to my trivial quiz web application! This project is an interactive Single Page Application (SPA) that offers an immersive and educational quiz-taking experience. With a user-friendly interface and a diverse range of categories, the application is suitable for all knowledge levels and ages. The aim is to put into practice all the skills acquired in JavaScript.
 
-![]()
+![](https://github.com/Cocera/The_Quiz/blob/main/assets/mockupQuiz.gif)
 
 ### Technologies Used:
 
