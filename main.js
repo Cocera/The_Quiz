@@ -1,15 +1,12 @@
 const homeNav = document.getElementById('home-nav');
 const resultsNav = document.getElementById('results-nav');
 const btnClearNav = document.getElementById('clear-nav');
-
 const homeBody = document.getElementById('home-body');
 const categoriesBody = document.getElementById('categories-body');
 const questionBody = document.getElementById('question-body');
 const resultsBody = document.getElementById('results-body');
-
 const btnStartGame = document.getElementById('start-game');
 const answerBtns = document.getElementById('answer-buttons');
-
 const valueUserName = document.getElementById('input-user-name');
 
 
@@ -20,12 +17,8 @@ const valueUserName = document.getElementById('input-user-name');
 let currentQuestionIndex;
 let arrUsersResults = []; 
 let questionsAll = [];
-
 let userName = '';
 let correctAnswersCounter = 0;
-
-
-
 
 // ---------- Set SPA
 
@@ -60,11 +53,7 @@ function showResultsBody() {
 };
 
 homeNav.addEventListener('click', showHomeBody);
-
 resultsNav.addEventListener('click', showResultsBody);
-
-
-
 
 
 
@@ -110,9 +99,6 @@ function printRanking() {
 
 
 
-
-
-
 // ---------- Start game
 
 function showQuestion(question) {
@@ -151,7 +137,6 @@ function showQuestion(question) {
     });
     saveUsersScores(userName, correctAnswersCounter);
 };
-
 
 
 function setNextQuestion() {
@@ -217,6 +202,8 @@ function saveUsersScores(name, score) {
     };
     printRanking()
 };
+
+
 
 
 btnStartGame.addEventListener('click', startGame);
