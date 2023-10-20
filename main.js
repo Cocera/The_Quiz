@@ -131,7 +131,7 @@ function showQuestion(question) {
         button.addEventListener('click', () => {
 
             if (button.innerText == question.correct_answer) {
-                correctAnswersCounter+= 5
+                correctAnswersCounter+= 1
             } else if (button.innerText != question.correct_answer) {
                 correctAnswersCounter -= 0.5;
             };
